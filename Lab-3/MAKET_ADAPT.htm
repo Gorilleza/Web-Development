@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HOTFIX</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(11, 169, 53);
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+
+        .menu {
+            flex: 0 0 250px; /* Фиксированная ширина меню */
+            background-color: rgb(174, 237, 48);
+            padding: 20px;
+        }
+
+        .content {
+            flex: 1;
+            background-color: rgb(32, 209, 203);
+            padding: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(138, 94, 220);
+            color: white;
+        }
+
+        .menu ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            font-family: cursive;
+        }
+
+        .menu h3 {
+            margin-top: 20px;
+        }
+
+
+        .content img {
+            float: left;
+            margin: 0 20px 20px 0;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex: 1 0 100%; /* Меню растягивается на всю ширину */
+                order: 2; /* Меню опускается ниже контента */
+            }
+
+            .content {
+                order: 1; /* Контент поднимается выше меню */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать в<br>HOTFIX</h1>
+    </header>
+
+    <div class="container">
+        <div class="menu">
+            <h3>Меню:</h3>
+            <ul>
+                <li><a href="https://eda.ru/recepty/pasta-picca/picca-domashnyaya-173877">Пицца</a></li>
+                <li><a href="https://eda.ru/recepty/pasta-picca/pasta-karbonara-pasta-alla-carbonara-50865">Паста карбонара</a></li>
+                <li><a href="https://eda.ru/recepty/sendvichi/klassicheskiy-burger-114799">Бургер</a></li>
+                <li><a href="https://eda.ru/recepty/supy/gribnoy-sup-18620">Грибной суп</a></li>
+            </ul>
+            <h3>Десерты:</h3>
+            <ul>
+                <li><a href="https://eda.ru/recepty/vypechka-deserty/zavarnoe-testo-dlja-jeklerov-35050">Эклеры</a></li>
+                <li><a href="https://www.russianfood.com/recipes/bytype/?fid=48">Мороженое</a></li>
+                <li><a href="https://eda.ru/recepty/vypechka-deserty/pirozhnoe-makaron-s-tremja-nachinkami-39546">Пирожное макарон</a></li>
+            </ul>
+            <h3>Напитки:</h3>
+            <ul>
+                <li>Лимонад</li>
+                <li>Coca-cola</li>
+                <li>Sprite</li>
+                <li>Fanta</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <img src="/Users/eziz/Desktop/WEB-программирование/Lab 2/images.png">
+                HOTFIX COFFEE – международная сеть кофеен, которая специализируется на продаже высококачественного кофе, основных блюд, десертов и выпечки собственного производства по фиксированным ценам от 3 BYN в Беларуси.
+                <br><br>НАША МИССИЯ - делать кофе и любимые блюда с любовью и заботой о вас<br><br>ЦЕННОСТИ КОМПАНИИ:<br><br>- ЗАБОТА О ГОСТЯХ<br><br>Вы вдохновляете нас на новые достижения <br><br>- ПРОФЕССИОНАЛИЗМ<br><br>Мы никогда не стоим на месте, наша команда постоянно развивается
+                <br><br>- КОМАНДА<br><br>Верим в силу командной работы, основанной на уважении, честности, доверии и взаимной поддержке<br><br>- ВОВЛЕЧЕННОСТЬ<br><br>Мы с удовольствием выполняем свою работу, расставляя приоритеты и проявляя инициативность<br><br>- ОТВЕТСТВЕННОСТЬ<br><br>Мы всегда выполняем свои обязательства перед сотрудниками, партнерами, поставщиками и нашими Гостями.<br><br>Задача HOTFIX COFFEE–дать возможность людям покупать качественную, свежую еду и напитки по доступной фиксированной цене.<br>Мы тщательно отбираем поставщиков, работаем по международным стандартам безопасности пищевой продукции и ежеквартально проводим аудит работы поставщиков.
+        </div>
+    </div>
+<footer>
+    Наши контакты:<br>+1234567890<br>example@gmail.com<br><br>Адрес: ул. Октябрьская 10
+</footer>
+</body>
+</html>
