@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню ресторана</title>
+</head>
+<body>
+    <h1>Управление меню ресторана</h1>
+    <button onclick="AddDish()">Ввод информации о блюде</button>
+    <button onclick="DeleteDish()">Удаление информации о блюде</button>
+    <button onclick="GetDishInfo()">Получение информации о блюде</button>
+    <button onclick="ListDishes()">Перечень всех блюд</button>
+
+    <script src="THashStorage.js"></script>
+    <script src="Storage.js"></script>
+    <script>
+    
+        function AddDish() {
+            let dishName = prompt("Введите название блюда:");
+            let description = prompt("Введите описание блюда:");
+            Storage.AddValue(dishName, description);
+            alert(`Блюдо "${dishName}" добавлено в меню.`);
+        }
+
+        function DeleteDish() {
+            let dishName = prompt("Введите название блюда для удаления:");
+            let result = Storage.DeleteValue(dishName);
+            alert(result);
+        }
+
+        function GetDishInfo() {
+            let dishName = prompt("Введите название блюда для получения информации:");
+            let info = Storage.GetValue(dishName);
+            if (info) {
+                alert(`Блюдо: ${dishName}\nОписание: ${info}`);
+            } else {
+                alert(`Нет информации о блюде "${dishName}".`);
+            }
+        }
+
+        function ListDishes() {
+            let dishes = Storage.GetKeys();
+            if (dishes.length > 0) {
+                let result = "Меню:\n";
+                dishes.forEach(dish => {
+                    result += `Блюдо: ${dish}\nОписание: ${Storage.GetValue(dish)}\n\n`;
+                });
+                console.log(result); 
+                alert(result); 
+            } else {
+                console.log("Меню пусто."); 
+                alert("Меню пусто.");
+            }
+        }
+    </script>
+</body>
+</html>
