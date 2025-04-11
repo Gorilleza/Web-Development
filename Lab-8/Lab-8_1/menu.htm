@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mеню - HOTFIX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #da8208;
+        }
+        
+        #main-menu {
+            background-color: #0ba935;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        #main-menu a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        
+        .menu-container {
+            width: 100%;
+            background-color: #333;
+            position: relative;
+        }
+        
+        .horizontal-menu {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #207cc7;
+        }
+        
+        .menu-item {
+            position: relative;
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .menu-item:hover {
+            background-color: #555;
+        }
+        
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .submenu .menu-item {
+            white-space: nowrap;
+        }
+        
+        .submenu .submenu {
+            top: 0;
+            left: 100%;
+        }
+        
+        .has-submenu::after {
+            content: "▼";
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+        
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-menu">
+        <a href="MAKET_DIV.htm">Главная</a>
+        <a>Mеню</a>
+    </div>
+    
+    <div class="menu-container">
+        <ul class="horizontal-menu" id="top-menu"></ul>
+    </div>
+    
+    <script>
+        const MenuA = [
+            {
+                name: 'Горячие блюда',
+                submenu: [
+                    {
+                        name: 'Супы', 
+                        submenu: [
+                            {name: 'Куриный суп', url: "https://eda.ru/recepty/supy/kurinij-sup-po-domashnemu-16144"},
+                            {name: 'Грибной суп', url: 'https://eda.ru/recepty/supy/gribnoy-sup-18620'}
+                        ]
+                    },
+                    {
+                        name: 'Основные блюда',
+                        submenu: [
+                            {name: 'Паста карбонара', url: 'https://eda.ru/recepty/pasta-picca/pasta-karbonara-pasta-alla-carbonara-50865'},
+                            {name: 'Курица с овощами', url: 'https://eda.ru/recepty/osnovnye-blyuda/kurica-s-ovoshhami-v-duhovke-30925'}
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'Десерты',
+                submenu: [
+                    {name: 'Тирамису', url: 'https://eda.ru/recepty/vypechka-deserty/tiramisu-21916'},
+                    {name: 'Чизкейк', url: 'https://eda.ru/recepty/vypechka-deserty/chizkejk-klassicheskij-21917'}
+                ]
+            }
+        ];
+
+        function ShowMenu(MenuItemsA, ParentElem) {
+            const submenu = document.createElement('ul');
+            submenu.className = 'submenu';
+            
+            MenuItemsA.forEach(item => {
+                const menuItem = document.createElement('li');
+                menuItem.className = 'menu-item';
+                
+                if (item.submenu) {
+                    menuItem.classList.add('has-submenu');
+                    menuItem.textContent = item.name;
+                    
+                    menuItem.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        
+                        const siblings = Array.from(this.parentElement.children);
+                        siblings.forEach(sibling => {
+                            if (sibling !== this) {
+                                const sub = sibling.querySelector('.submenu');
+                                if (sub) sub.classList.remove('active');
+                            }
+                        });
+                        
+                        const existingSubmenu = this.querySelector('.submenu');
+                        if (existingSubmenu) {
+                            existingSubmenu.classList.toggle('active');
+                        } else {
+                            ShowMenu(item.submenu, this);
+                            this.querySelector('.submenu').classList.add('active');
+                        }
+                    });
+                } else {
+                    const link = document.createElement('a');
+                    link.href = item.url || '#';
+                    link.textContent = item.name;
+                    link.style.color = 'white';
+                    link.style.textDecoration = 'none';
+                    menuItem.appendChild(link);
+                }
+                
+                submenu.appendChild(menuItem);
+            });
+            
+            const oldSubmenu = ParentElem.querySelector('.submenu');
+            if (oldSubmenu) {
+                oldSubmenu.remove();
+            }
+            
+            ParentElem.appendChild(submenu);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const topMenu = document.getElementById('top-menu');
+            
+            MenuA.forEach(item => {
+                const menuItem = document.createElement('li');
+                menuItem.className = 'menu-item';
+                
+                if (item.submenu) {
+                    menuItem.classList.add('has-submenu');
+                    menuItem.textContent = item.name;
+                    
+                    menuItem.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        
+                        const siblings = Array.from(this.parentElement.children);
+                        siblings.forEach(sibling => {
+                            if (sibling !== this) {
+                                const sub = sibling.querySelector('.submenu');
+                                if (sub) sub.classList.remove('active');
+                            }
+                        });
+                        
+                        const existingSubmenu = this.querySelector('.submenu');
+                        if (existingSubmenu) {
+                            existingSubmenu.classList.toggle('active');
+                        } else {
+                            ShowMenu(item.submenu, this);
+                            this.querySelector('.submenu').classList.add('active');
+                        }
+                    });
+                } else {
+                    const link = document.createElement('a');
+                    link.href = item.url || '#';
+                    link.textContent = item.name;
+                    link.style.color = 'white';
+                    link.style.textDecoration = 'none';
+                    menuItem.appendChild(link);
+                }
+                
+                topMenu.appendChild(menuItem);
+            });
+            
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.submenu.active').forEach(menu => {
+                    menu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
