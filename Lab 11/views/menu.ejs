@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню Hotfix</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <main class="menu-page">
+        <section class="menu-section">
+            <h2>Наше меню</h2>
+            <div class="menu-categories">
+                <div class="category">
+                    <h3>Основные блюда</h3>
+                    <div class="items-container">
+                        <% menu.forEach(item => { %>
+                            <div class="item">
+                                <h4><%= item.name %></h4>
+                                <p class="price"><%= item.price %> BYN.</p>
+                                <p class="description"><%= item.description || 'Вкусное блюдо' %></p>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
